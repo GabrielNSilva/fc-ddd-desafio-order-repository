@@ -4,7 +4,6 @@ export default class OrderItem {
   private _name: string;
   private _price: number;
   private _quantity: number;
-  private _total: number;
 
   constructor(
     id: string,
@@ -18,7 +17,6 @@ export default class OrderItem {
     this._price = price;
     this._productId = productId;
     this._quantity = quantity;
-    this._total = this.total();
   }
 
   get id(): string {
@@ -39,6 +37,13 @@ export default class OrderItem {
 
   get price(): number {
     return this._price;
+  }
+
+  alterQuantity(newQuantity: number): void {
+    if(newQuantity < 1) {
+      throw new Error("Item quantity needs be at least 1");
+    }
+    this._quantity = newQuantity;
   }
 
   total(): number {
